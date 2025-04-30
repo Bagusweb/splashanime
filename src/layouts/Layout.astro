@@ -1,0 +1,216 @@
+---
+import "@styles/global.css";
+import { SEO, type SEOProps } from "astro-seo";
+import animeConfig from "@configs/animeConfig";
+import Footer from "@components/Footer.astro";
+import Navbar from "@components/Navbar.astro";
+
+interface Props {
+  seo?: SEOProps;
+}
+
+const {
+  wajiknime: { siteName, description, favicon },
+} = animeConfig;
+
+// SEO BAWAAN
+const seoProps = Astro.props.seo;
+const seo: SEOProps = {
+  titleDefault: siteName,
+  description: description,
+  ...seoProps,
+};
+---
+
+<html lang="en">
+  <head>
+    <!-- META TAG UTAMA -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- MENGATASI IMAGE FORBIDDEN DI LOCALHOST -->
+    <meta name="referrer" content="no-referrer" />
+
+    <!-- LAIN2 -->
+    <!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
+    <link rel="icon" href={favicon} />
+
+    <!-- FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- FLOWBITE -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- TAG-TAG RAMAH SEO CUY -->
+    <SEO {...seo} />
+
+    <!-- <title>Judul Halaman | Kata Kunci Utama - Nama Situs</title> -->
+  </head>
+  <body
+    class="font-inter relative bg-zinc-200 dark:bg-zinc-950 text-zinc-800 dark:text-zinc-50"
+  >
+    <!-- NAVBAR -->
+    <Navbar
+      navLinks={[
+        {
+          title: "Home",
+          href: "/",
+        },
+        {
+          title: "Ongoing",
+          href: "/ongoing",
+        },
+        {
+          title: "Completed",
+          href: "/completed",
+        },
+        {
+          title: "Daftar Anime",
+          href: "/anime",
+        },
+      ]}
+    />
+
+    <!-- DYNAMIC CONTENT -->
+    <main id="main" class="container min-h-screen relative">
+      <div id="leluhur" class="hidden flex-col gap-3">
+        <slot />
+      </div>
+
+      <!-- SPINNER -->
+      <div
+        id="spinner-wrapper"
+        class="top-0 right-8 pt-[90px] fixed flex justify-center items-center"
+      >
+        <span class="loader"></span>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <Footer
+      navLinks={{
+        _1: [
+          {
+            title: "Daftar Genre",
+            href: "/genres",
+          },
+          {
+            title: "Jadwal Rilis",
+            href: "/schedule",
+          },
+          {
+            title: "Movies",
+            href: "/movies",
+          },
+          {
+            title: "Terpopuler",
+            href: "/popular",
+          },
+        ],
+        _2: [
+          {
+            title: "Disclaimers",
+            href: "/disclaimers",
+          },
+          {
+            title: "Donasi",
+            href: "https://saweria.co/baguserlangga",
+            targetBlank: true,
+          },
+          {
+            title: "Terima Kasih",
+            href: "https://saweria.co/baguserlangga",
+            targetBlank: true,
+          },
+        ],
+      }}
+    />
+  </body>
+</html>
+
+<!-- FLOWBITE -->
+<script
+  is:inline
+  src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"
+></script>
+
+<script is:inline>
+  // MENGATUR AWAL TEMA
+  (function () {
+    function isDark() {
+      return (
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      );
+    }
+
+    function getTheme() {
+      const theme = localStorage.getItem("theme");
+
+      if (theme) return theme;
+
+      return isDark() ? "dark" : "light";
+    }
+
+    function setTheme() {
+      const htmlEl = document.documentElement;
+      const moonIconEl = document.getElementById("icon-moon");
+      const sunIconEl = document.getElementById("icon-sun");
+      const theme = getTheme();
+
+      if (moonIconEl && sunIconEl) {
+        if (theme === "light") {
+          sunIconEl.classList.remove("hidden");
+          moonIconEl.classList.add("hidden");
+        } else if (theme === "dark") {
+          moonIconEl.classList.remove("hidden");
+          sunIconEl.classList.add("hidden");
+        }
+      }
+
+      htmlEl.dataset.theme = theme;
+      htmlEl.style.colorScheme = theme;
+      localStorage.setItem("theme", theme);
+    }
+
+    setTheme();
+  })();
+
+  // MENGATUR LOADING
+  document.addEventListener("DOMContentLoaded", () => {
+    const leluhurEl = document.getElementById("leluhur");
+    const spinnerWrapperEl = document.getElementById("spinner-wrapper");
+
+    leluhurEl.classList.remove("hidden");
+    leluhurEl.classList.add("flex");
+    spinnerWrapperEl.classList.add("hidden");
+  });
+</script>
+
+<script>
+  // MENGATUR PADDING TOP SESUAI DENGAN TINGGI NAVBAR
+  function adjustMainPaddingTop() {
+    const mainEl = document.getElementById("main");
+    const navbarEl = document.getElementById("navbar");
+    const paddingY = 12;
+
+    if (mainEl && navbarEl) {
+      const navbarHeight = navbarEl.offsetHeight;
+
+      mainEl.style.paddingTop = `${navbarHeight + paddingY}px`;
+      mainEl.style.paddingBottom = `${paddingY}px`;
+    }
+  }
+
+  window.addEventListener("load", adjustMainPaddingTop);
+  window.addEventListener("resize", adjustMainPaddingTop);
+</script>

@@ -1,0 +1,113 @@
+---
+interface Props {
+  anime: {
+    defaultStreamingUrl: string;
+    server: { qualities: Quality[] };
+  };
+}
+
+const { anime } = Astro.props;
+---
+
+<select
+  id="servers"
+  class="bg-zinc-50 border border-zinc-300 text-zinc-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+>
+  <option selected value={anime.defaultStreamingUrl} id="default-server"
+    >Server Bawaan</option
+  >
+  {
+    anime.server.qualities.map((quality) => {
+      if (quality.serverList && quality.serverList.length > 0) {
+        return (
+          <>
+            <option disabled>{quality.title}</option>
+            {quality.serverList?.map((server) => (
+              <option value={server.serverId}>{server.title}</option>
+            ))}
+          </>
+        );
+      }
+    })
+  }
+</select>
+<div
+  id="video-player-wrapper"
+  class="flex justify-center items-center aspect-video bg-zinc-300 dark:bg-zinc-700 rounded-lg overflow-hidden"
+>
+  {
+    anime.defaultStreamingUrl.toLowerCase() === "no iframe found" ? (
+      <h5 class="text-lg font-extrabold">Server Tidak Tersedia</h5>
+    ) : anime.defaultStreamingUrl.endsWith(".mp4") ? (
+      <video
+        id="video-player-video"
+        class="w-full h-full"
+        controls
+        src={anime.defaultStreamingUrl}
+      />
+    ) : (
+      <iframe
+        id="video-player-iframe"
+        src={anime.defaultStreamingUrl}
+        allowfullscreen
+        class="w-full h-full"
+      />
+    )
+  }
+</div>
+
+<script>
+  // LOGIC PEMILIH SERVER
+  const selectEl = document.getElementById("servers") as HTMLSelectElement;
+  const defaultServerEl = document.getElementById(
+    "default-server"
+  ) as HTMLOptionElement;
+  const videoPlayerWrapper = document.getElementById(
+    "video-player-wrapper"
+  ) as HTMLDivElement;
+
+  function cuss(src: string) {
+    if (src.endsWith(".mp4")) {
+      videoPlayerWrapper.innerHTML = `
+        <video
+          id="video-player-video"
+          class="w-full h-full"
+          controls
+          src=${src}
+        />
+      `;
+    } else {
+      videoPlayerWrapper.innerHTML = `
+        <iframe
+          id="video-player-iframe"
+          class="w-full h-full"
+          allowfullscreen
+          src=${src}
+        />
+      `;
+    }
+  }
+
+  selectEl.addEventListener("change", async function () {
+    videoPlayerWrapper.innerHTML = `
+      <span id="video-player-spinner" class="loader" />
+    `;
+
+    if (this.value === defaultServerEl.value) {
+      cuss(this.value);
+    } else {
+      try {
+        const response = await fetch(`/api/server/${this.value}`, {
+          method: "POST",
+        });
+        const data = await response.json();
+
+        cuss(data?.url || defaultServerEl.value);
+      } catch (error) {
+        videoPlayerWrapper.innerHTML = `
+          <h5 class="text-lg font-extrabold">Server Tidak Tersedia</h5>
+        `;
+      }
+    }
+  });
+</script>

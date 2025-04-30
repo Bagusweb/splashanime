@@ -1,0 +1,56 @@
+---
+import generateUrlPath from "@utils/generateUrlPath";
+import StarIcon from "./icons/StarIcon.astro";
+
+interface Props {
+  anime: {
+    list: AnimeCard2[];
+    baseUrlPath: string;
+  };
+}
+
+const {
+  anime: { list, baseUrlPath },
+} = Astro.props;
+---
+
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+  {
+    list.map((anime) => (
+      <>
+        <a
+          href={generateUrlPath(
+            baseUrlPath,
+            anime.animeId || anime.batchId || ""
+          )}
+          class="group rounded-lg relative"
+        >
+          <div class="relative">
+            <img
+              loading="lazy"
+              class="anime2-item-img"
+              src={anime.poster}
+              alt={anime.title}
+            />
+            <span class="anime2-item-type">{anime.type}</span>
+            <span class="anime2-item-score">
+              <StarIcon class="w-[12px] h-[12px]" />
+              <span>{anime.score}</span>
+            </span>
+            <span class="anime2-item-status">{anime.status}</span>
+          </div>
+          <div class="p-2">
+            <h3 class="anime2-item-title">{anime.title}</h3>
+          </div>
+        </a>
+        <div class="hidden">
+          {anime.genreList.map((genre) => (
+            <a href={generateUrlPath("/genres", genre.genreId)}>
+              {genre.title}
+            </a>
+          ))}
+        </div>
+      </>
+    ))
+  }
+</div>

@@ -1,0 +1,60 @@
+---
+import Layout from "@layouts/Layout.astro";
+import WidgetTitle from "@components/WidgetTitle.astro";
+import Breadcrumb from "@components/Breadcrumb.astro";
+import Sesepuh from "@components/Sesepuh.astro";
+import Content from "@components/Content.astro";
+import Sidebar from "@components/Sidebar.astro";
+import animeConfig from "@configs/animeConfig";
+import completedService from "@services/completedService";
+import AnimeList2 from "@components/AnimeList2.astro";
+import Pagination from "@components/Pagination.astro";
+import Error from "@components/Error.astro";
+
+const {
+  wajiknime: { siteName },
+} = animeConfig;
+const page = Astro.url.searchParams.get("page");
+const completed = await completedService({ page });
+---
+
+{
+  () => {
+    if (completed.ok) {
+      const title = `Completed | Anime Selesai Tayang - ${siteName}`;
+
+      return (
+        <Layout
+          seo={{
+            title,
+            description: "",
+          }}
+        >
+          <Breadcrumb />
+          <Sesepuh>
+            <Content>
+              <WidgetTitle title="Anime Selesai Tayang" />
+              <AnimeList2
+                anime={{
+                  list: completed.data.animeList,
+                  baseUrlPath: "/anime",
+                }}
+              />
+              <Pagination pagination={completed.pagination} />
+            </Content>
+            <Sidebar>
+              <WidgetTitle title="Sidebar" />
+            </Sidebar>
+          </Sesepuh>
+        </Layout>
+      );
+    }
+
+    return (
+      <Error
+        statusCode={completed.statusCode}
+        message={completed.message || completed.statusMessage}
+      />
+    );
+  }
+}

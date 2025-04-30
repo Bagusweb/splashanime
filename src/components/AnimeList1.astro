@@ -1,0 +1,41 @@
+---
+import generateUrlPath from "@utils/generateUrlPath";
+
+interface Props {
+  anime: {
+    list: AnimeCard1[];
+    baseUrlPath: string;
+  };
+}
+
+const {
+  anime: { list, baseUrlPath },
+} = Astro.props;
+---
+
+<div class={`py-3 gap-4 grid xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4`}>
+  {
+    list.map((anime) => (
+      <a
+        href={generateUrlPath(
+          baseUrlPath,
+          anime.animeId || anime.batchId || ""
+        )}
+        class="group relative"
+      >
+        <div class="relative overflow-hidden rounded-lg">
+          <img
+            loading="lazy"
+            class="anime1-item-img"
+            src={anime.poster}
+            alt={anime.title}
+          />
+          <span class="anime1-item-eps">Ep {anime.episodes}</span>
+        </div>
+        <div class="p-2">
+          <h3 class="anime1-item-title">{anime.title}</h3>
+        </div>
+      </a>
+    ))
+  }
+</div>

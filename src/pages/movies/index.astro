@@ -1,0 +1,60 @@
+---
+import Layout from "@layouts/Layout.astro";
+import WidgetTitle from "@components/WidgetTitle.astro";
+import Breadcrumb from "@components/Breadcrumb.astro";
+import Sesepuh from "@components/Sesepuh.astro";
+import Content from "@components/Content.astro";
+import Sidebar from "@components/Sidebar.astro";
+import animeConfig from "@configs/animeConfig";
+import movieService from "@services/movieService";
+import AnimeList2 from "@components/AnimeList2.astro";
+import Pagination from "@components/Pagination.astro";
+import Error from "@components/Error.astro";
+
+const {
+  wajiknime: { siteName },
+} = animeConfig;
+const page = Astro.url.searchParams.get("page");
+const movie = await movieService({ page });
+---
+
+{
+  () => {
+    if (movie.ok) {
+      const title = `Movies | Anime Movie - ${siteName}`;
+
+      return (
+        <Layout
+          seo={{
+            title,
+            description: "",
+          }}
+        >
+          <Breadcrumb />
+          <Sesepuh>
+            <Content>
+              <WidgetTitle title="Anime Movie" />
+              <AnimeList2
+                anime={{
+                  list: movie.data.animeList,
+                  baseUrlPath: "/anime",
+                }}
+              />
+              <Pagination pagination={movie.pagination} />
+            </Content>
+            <Sidebar>
+              <WidgetTitle title="Sidebar" />
+            </Sidebar>
+          </Sesepuh>
+        </Layout>
+      );
+    }
+
+    return (
+      <Error
+        statusCode={movie.statusCode}
+        message={movie.message || movie.statusMessage}
+      />
+    );
+  }
+}

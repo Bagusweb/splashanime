@@ -1,0 +1,88 @@
+---
+import homeService from "@services/homeService";
+import animeConfig from "@configs/animeConfig";
+import Sesepuh from "@components/Sesepuh.astro";
+import Layout from "@layouts/Layout.astro";
+import WidgetTitle from "@components/WidgetTitle.astro";
+import Carousel from "@components/Carousel.astro";
+import Breadcrumb from "@components/Breadcrumb.astro";
+import Content from "@components/Content.astro";
+import Sidebar from "@components/Sidebar.astro";
+import AnimeList1 from "@components/AnimeList1.astro";
+import AnimeList3 from "@components/AnimeList3.astro";
+import Error from "@components/Error.astro";
+
+const {
+  wajiknime: { siteName, description, image },
+} = animeConfig;
+const home = await homeService();
+---
+
+{
+  () => {
+    if (home.ok) {
+      const title = `${siteName} - Nonton Streaming & Download Anime Sub Indo Subtitle Indonesia Gratis`;
+
+      return (
+        <Layout
+          seo={{
+            title,
+            description,
+            openGraph: {
+              basic: {
+                title,
+                image: `${Astro.url.origin + image}`,
+                type: "website",
+              },
+              optional: {
+                siteName,
+              },
+            },
+          }}
+        >
+          <Carousel
+            anime={{
+              list: home.data.recent.animeList.slice(0, 5),
+              baseUrlPath: "/anime",
+            }}
+          />
+          <Breadcrumb />
+          <Sesepuh>
+            <Content>
+              <WidgetTitle title="Episode Terbaru" href="/recent" />
+              <AnimeList1
+                anime={{
+                  list: home.data.recent.animeList,
+                  baseUrlPath: "/anime",
+                }}
+              />
+              <WidgetTitle title="Download Batch Anime" href="/batch" />
+              <AnimeList1
+                anime={{
+                  list: home.data.batch.batchList,
+                  baseUrlPath: "/batch",
+                }}
+              />
+            </Content>
+            <Sidebar>
+              <WidgetTitle title="Anime Movie" href="/movies" />
+              <AnimeList3
+                anime={{
+                  list: home.data.movie.animeList,
+                  baseUrlPath: "/anime",
+                }}
+              />
+            </Sidebar>
+          </Sesepuh>
+        </Layout>
+      );
+    }
+
+    return (
+      <Error
+        statusCode={home.statusCode}
+        message={home.message || home.statusMessage}
+      />
+    );
+  }
+}

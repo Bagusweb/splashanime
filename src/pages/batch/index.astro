@@ -1,0 +1,60 @@
+---
+import Layout from "@layouts/Layout.astro";
+import WidgetTitle from "@components/WidgetTitle.astro";
+import Breadcrumb from "@components/Breadcrumb.astro";
+import Sesepuh from "@components/Sesepuh.astro";
+import Content from "@components/Content.astro";
+import Sidebar from "@components/Sidebar.astro";
+import animeConfig from "@configs/animeConfig";
+import batchService from "@services/batchService";
+import AnimeList2 from "@components/AnimeList2.astro";
+import Pagination from "@components/Pagination.astro";
+import Error from "@components/Error.astro";
+
+const {
+  wajiknime: { siteName },
+} = animeConfig;
+const page = Astro.url.searchParams.get("page");
+const batch = await batchService({ page });
+---
+
+{
+  () => {
+    if (batch.ok) {
+      const title = `Batch | Download Batch Anime - ${siteName}`;
+
+      return (
+        <Layout
+          seo={{
+            title,
+            description: "",
+          }}
+        >
+          <Breadcrumb />
+          <Sesepuh>
+            <Content>
+              <WidgetTitle title="Download Batch Anime" />
+              <AnimeList2
+                anime={{
+                  list: batch.data.batchList,
+                  baseUrlPath: "/batch",
+                }}
+              />
+              <Pagination pagination={batch.pagination} />
+            </Content>
+            <Sidebar>
+              <WidgetTitle title="Sidebar" />
+            </Sidebar>
+          </Sesepuh>
+        </Layout>
+      );
+    }
+
+    return (
+      <Error
+        statusCode={batch.statusCode}
+        message={batch.message || batch.statusMessage}
+      />
+    );
+  }
+}

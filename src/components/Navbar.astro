@@ -1,0 +1,211 @@
+---
+import animeConfig from "@configs/animeConfig";
+import SearchIcon from "./icons/SearchIcon.astro";
+import MoonIcon from "./icons/MoonIcon.astro";
+import SunIcon from "./icons/SunIcon.astro";
+
+interface Props {
+  navLinks: {
+    title: string;
+    href: string;
+  }[];
+}
+
+const {
+  wajiknime: { siteName, logo },
+} = animeConfig;
+const { navLinks } = Astro.props;
+---
+
+<nav
+  id="navbar"
+  class="bg-white dark:bg-zinc-900 fixed w-full z-50 top-0 start-0 border-b border-zinc-200 dark:border-zinc-800"
+>
+  <div class="container flex flex-wrap items-center justify-between py-2">
+    <a
+      href={Astro.url.origin}
+      class="flex items-center space-x-3 rtl:space-x-reverse"
+    >
+      <img src={logo} class="w-8" alt=`${siteName} Logo` />
+      <h1
+        class="self-center text-xl font-semibold whitespace-nowrap dark:text-white"
+      >
+        {siteName}
+      </h1>
+    </a>
+    <div class="flex md:order-2 space-x-2 md:space-x-2 rtl:space-x-reverse">
+      <button
+        id="navbar-button-search-main"
+        data-dropdown-toggle="dropdownSearch"
+        data-dropdown-placement="bottom-end"
+        type="button"
+        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-zinc-700 rounded-lg hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-700"
+      >
+        <SearchIcon />
+      </button>
+      <div id="dropdownSearch" class="z-10 hidden w-full">
+        <ul
+          class="p-4 bg-white dark:bg-zinc-900 text-sm border-b border-zinc-200 dark:border-zinc-600 -translate-y-2"
+        >
+          <form
+            id="navbar-form-search"
+            class="max-w-md mx-auto text-zinc-700 dark:text-zinc-200"
+          >
+            <div class="flex">
+              <div class="relative w-full">
+                <input
+                  type="search"
+                  id="navbar-input-search"
+                  class="block p-2.5 w-full z-20 text-sm text-zinc-900 bg-zinc-50 rounded-lg border border-zinc-300 focus:ring-orange-500 focus:border-orange-500 dark:bg-zinc-800 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:border-orange-500"
+                  placeholder="Cari Anime.."
+                  required
+                />
+                <button
+                  type="submit"
+                  class="absolute top-0 end-0 h-full p-2.5 text-sm font-medium text-white bg-orange-600 rounded-e-lg border border-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 dark:bg-orange-500 dark:hover:bg-orange-600 dark:focus:ring-orange-700"
+                >
+                  <SearchIcon class="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </form>
+        </ul>
+      </div>
+      <button
+        id="button-theme"
+        type="button"
+        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-zinc-700 rounded-lg hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-700"
+      >
+        <MoonIcon id="icon-moon" class="hidden" />
+        <SunIcon id="icon-sun" class="text-amber-500 hidden" />
+      </button>
+      <button
+        data-collapse-toggle="navbar-sticky"
+        type="button"
+        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-zinc-700 rounded-lg md:hidden hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-700"
+        aria-controls="navbar-sticky"
+        aria-expanded="false"
+      >
+        <span class="sr-only">Open main menu</span>
+        <svg
+          class="w-5 h-5"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 17 14"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M1 1h15M1 7h15M1 13h15"></path>
+        </svg>
+      </button>
+    </div>
+    <div
+      class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+      id="navbar-sticky"
+    >
+      <ul
+        class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-zinc-300 rounded-lg bg-zinc-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-zinc-800 md:dark:bg-zinc-900 dark:border-zinc-700"
+      >
+        {
+          navLinks.map((link) => {
+            if (link.href === Astro.url.pathname) {
+              return (
+                <li>
+                  <a href={link.href} class="navbar-link-item active">
+                    {link.title}
+                  </a>
+                </li>
+              );
+            }
+
+            return (
+              <li>
+                <a href={link.href} class="navbar-link-item">
+                  {link.title}
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // LOGIKA TEMA
+  const themeButtonEl = document.getElementById("button-theme");
+
+  if (themeButtonEl) {
+    themeButtonEl.addEventListener("click", function () {
+      const moonIconEl = this.firstElementChild;
+      const sunIconEl = this.lastElementChild;
+
+      if (moonIconEl && sunIconEl) {
+        const htmlEl = document.documentElement;
+        const theme = localStorage.getItem("theme");
+
+        let newTheme = "";
+
+        if (theme === "light") {
+          sunIconEl.classList.add("hidden");
+          moonIconEl.classList.remove("hidden");
+          newTheme = "dark";
+        } else if (theme === "dark") {
+          moonIconEl.classList.add("hidden");
+          sunIconEl.classList.remove("hidden");
+          newTheme = "light";
+        }
+
+        htmlEl.dataset.theme = newTheme;
+        htmlEl.style.colorScheme = newTheme;
+        localStorage.setItem("theme", newTheme);
+      }
+    });
+  }
+
+  // LOGIKA PENCARIAN
+  const searchFormEl = document.getElementById(
+    "navbar-form-search"
+  ) as HTMLFormElement;
+  const mainSearchButtonEl = document.getElementById(
+    "navbar-button-search-main"
+  );
+  let timeouts: any[] = [];
+
+  if (mainSearchButtonEl) {
+    mainSearchButtonEl.addEventListener(
+      "click",
+      function () {
+        timeouts.forEach((timeout) => {
+          clearTimeout(timeout);
+        });
+
+        timeouts = [];
+
+        timeouts.push(
+          setTimeout(() => {
+            const searchInputEl = document.querySelector("input");
+
+            searchInputEl?.focus();
+          }, 100)
+        );
+      },
+      true
+    );
+  }
+
+  if (searchFormEl) {
+    searchFormEl.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const inputEl = this.querySelector("input");
+
+      location.href = `/search?q=${inputEl?.value}`;
+    });
+  }
+</script>

@@ -1,0 +1,57 @@
+---
+import Layout from "@layouts/Layout.astro";
+import WidgetTitle from "@components/WidgetTitle.astro";
+import Breadcrumb from "@components/Breadcrumb.astro";
+import Sesepuh from "@components/Sesepuh.astro";
+import Content from "@components/Content.astro";
+import Sidebar from "@components/Sidebar.astro";
+import GenreList from "@components/GenreList.astro";
+import daftarGenreService from "@services/genreService";
+import animeConfig from "@configs/animeConfig";
+import Error from "@components/Error.astro";
+
+const {
+  wajiknime: { siteName },
+} = animeConfig;
+const genre = await daftarGenreService();
+---
+
+{
+  () => {
+    if (genre.ok) {
+      const title = `Genre | Daftar Genre - ${siteName}`;
+
+      return (
+        <Layout
+          seo={{
+            title,
+            description: "",
+          }}
+        >
+          <Breadcrumb />
+          <Sesepuh>
+            <Content>
+              <WidgetTitle title="Daftar Genre" />
+              <GenreList
+                genre={{
+                  list: genre.data.genreList,
+                  baseUrlPath: "/genres",
+                }}
+              />
+            </Content>
+            <Sidebar>
+              <WidgetTitle title="Sidebar" />
+            </Sidebar>
+          </Sesepuh>
+        </Layout>
+      );
+    }
+
+    return (
+      <Error
+        statusCode={genre.statusCode}
+        message={genre.message || genre.statusMessage}
+      />
+    );
+  }
+}

@@ -1,0 +1,100 @@
+---
+import animeConfig from "@configs/animeConfig";
+import CoffeIcon from "./icons/CoffeIcon.astro";
+import GithubIcon from "./icons/GithubIcon.astro";
+
+interface Props {
+  navLinks: {
+    _1: {
+      title: string;
+      href: string;
+    }[];
+    _2: {
+      title: string;
+      href: string;
+      targetBlank?: boolean;
+    }[];
+  };
+}
+
+const {
+  wajiknime: { siteName, logo },
+} = animeConfig;
+const { navLinks } = Astro.props;
+---
+
+<footer class="bg-white dark:bg-zinc-900">
+  <div class="container w-full py-8 lg:py-10">
+    <div class="lg:flex lg:justify-between gap-8">
+      <div class="mb-6 lg:mb-0 max-w-[500px]">
+        <a href={Astro.url.origin} class="flex items-center max-w-min">
+          <img src={logo} class="w-8 me-3" alt=`${siteName} Logo` />
+          <span
+            class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
+            >{siteName}</span
+          >
+        </a>
+        <p class="py-4">
+          This site does not store any files on our server, we are linked to the
+          media which is hosted on 3rd party services.
+        </p>
+      </div>
+      <div class="grid grid-cols-2 gap-16">
+        <ul
+          class="flex flex-col gap-4 text-zinc-500 dark:text-zinc-400 font-medium"
+        >
+          {
+            navLinks._1.map((link) => (
+              <li>
+                <a href={link.href} class="hover:underline max-w-min">
+                  {link.title}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <ul
+          class="flex flex-col gap-4 text-zinc-500 dark:text-zinc-400 font-medium"
+        >
+          {
+            navLinks._2.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  target={link.targetBlank ? "_blank" : ""}
+                  class="hover:underline max-w-min"
+                >
+                  {link.title}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+    <hr class="my-6 border-zinc-200 sm:mx-auto dark:border-zinc-700 lg:my-8" />
+    <div class="sm:flex sm:items-center sm:justify-between">
+      <span class="text-sm text-zinc-500 sm:text-center dark:text-zinc-400"
+        >© {new Date().getFullYear()}
+        <a href={Astro.url.origin} class="hover:underline">{siteName}™</a>. All
+        Rights Reserved.
+      </span>
+      <div class="flex mt-4 sm:justify-center sm:mt-0">
+        <a
+          href="https://github.com/bagusweb"
+          target="_blank"
+          class="text-zinc-500 hover:text-zinc-900 dark:hover:text-white ms-5"
+        >
+          <GithubIcon />
+        </a>
+        <a
+          href="https://saweria.co/baguserlangga"
+          target="_blank"
+          class="text-zinc-500 hover:text-zinc-900 dark:hover:text-white ms-5"
+        >
+          <CoffeIcon />
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

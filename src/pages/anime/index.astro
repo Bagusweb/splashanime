@@ -1,0 +1,57 @@
+---
+import Layout from "@layouts/Layout.astro";
+import WidgetTitle from "@components/WidgetTitle.astro";
+import Breadcrumb from "@components/Breadcrumb.astro";
+import Sesepuh from "@components/Sesepuh.astro";
+import Content from "@components/Content.astro";
+import Sidebar from "@components/Sidebar.astro";
+import daftarAnimeService from "@services/animeService";
+import animeConfig from "@configs/animeConfig";
+import AnimeList0 from "@components/AnimeList0.astro";
+import Error from "@components/Error.astro";
+
+const {
+  wajiknime: { siteName },
+} = animeConfig;
+const anime = await daftarAnimeService();
+---
+
+{
+  () => {
+    if (anime.ok) {
+      const title = `Anime | Daftar Anime - ${siteName}`;
+
+      return (
+        <Layout
+          seo={{
+            title,
+            description: "",
+          }}
+        >
+          <Breadcrumb />
+          <Sesepuh>
+            <Content>
+              <WidgetTitle title="Daftar Anime" />
+              <AnimeList0
+                anime={{
+                  list: anime.data.list,
+                  baseUrlPath: "/anime",
+                }}
+              />
+            </Content>
+            <Sidebar>
+              <WidgetTitle title="Sidebar" />
+            </Sidebar>
+          </Sesepuh>
+        </Layout>
+      );
+    }
+
+    return (
+      <Error
+        statusCode={anime.statusCode}
+        message={anime.message || anime.statusMessage}
+      />
+    );
+  }
+}

@@ -1,0 +1,124 @@
+---
+import Layout from "@layouts/Layout.astro";
+import WidgetTitle from "@components/WidgetTitle.astro";
+import Breadcrumb from "@components/Breadcrumb.astro";
+import Sesepuh from "@components/Sesepuh.astro";
+import Content from "@components/Content.astro";
+import Sidebar from "@components/Sidebar.astro";
+import animeConfig from "@configs/animeConfig";
+import batchInfoService from "@services/batchInfoService";
+import generateUrlPath from "@utils/generateUrlPath";
+import StarIcon from "@components/icons/StarIcon.astro";
+import AnimeDetails from "@components/AnimeDetails.astro";
+import DownloadLink from "@components/DownloadLink.astro";
+import Error from "@components/Error.astro";
+
+const {
+  wajiknime: { siteName },
+} = animeConfig;
+const { batchId } = Astro.params;
+const batchInfo = await batchInfoService({ batchId: batchId! });
+const { data } = batchInfo;
+---
+
+{
+  () => {
+    if (batchInfo.ok) {
+      const title = `Download Batch Anime ${data.title} - ${siteName}`;
+
+      return (
+        <Layout
+          seo={{
+            title,
+            description: "",
+          }}
+        >
+          <Breadcrumb
+            currentPage={{
+              title: data.title,
+              href: Astro.url.href,
+              action: "replace",
+            }}
+          />
+          <Sesepuh>
+            <Content>
+              <div class="relative">
+                <img
+                  src={data.poster}
+                  class="w-full aspect-[16/6] object-cover rounded-t-md"
+                  alt={data.title}
+                />
+                <div class="absolute top-0 right-0 bottom-0 left-0 rounded-t-md bg-gradient-to-t from-zinc-100 dark:from-zinc-900 to-transparent" />
+              </div>
+
+              <div class="flex flex-col sm:flex-row justify-center items-center sm:justify-start gap-4 sm:items-end xs:-mt-[100px] sm:-mt-[150px] relative p-4">
+                <img
+                  src={data.poster}
+                  alt={data.title}
+                  class="w-[150px] sm:w-[170px] md:w-[200px] rounded-md aspect-[3/4]"
+                />
+                <div class="flex flex-col gap-3 items-center text-center sm:items-start sm:text-left">
+                  <h1 class="text-xl md:text-2xl font-extrabold line-clamp-2">
+                    {data.synonyms || data.english || data.title}
+                  </h1>
+                  <p class="flex">
+                    <span class="flex gap-1 items-center">
+                      <StarIcon class="w-4 h-4" />
+                      {data.score} | {data.status}
+                    </span>
+                  </p>
+                  <div class="flex gap-2">
+                    <a
+                      href="#download"
+                      class="max-w-min flex gap-1 text-white bg-amber-700 hover:bg-amber-800 focus:outline-none focus:ring-4 focus:ring-amber-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-amber-600 dark:hover:bg-amber-700 dark:focus:ring-amber-800"
+                    >
+                      Download
+                    </a>
+                    <a
+                      href={generateUrlPath("/anime", data.animeId)}
+                      class="max-w-min flex gap-1 text-white bg-sky-700 hover:bg-sky-800 focus:outline-none focus:ring-4 focus:ring-sky-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800"
+                    >
+                      Info
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-4">
+                {data.synopsis.paragraphs.map((paragraph) => (
+                  <p class="text-zinc-600 dark:text-zinc-400">{paragraph}</p>
+                ))}
+                <div class="flex flex-col">
+                  {data.synopsis.connections?.map((conn) => (
+                    <a
+                      href={generateUrlPath("/anime", conn.animeId)}
+                      class="text-blue-600 dark:text-blue-400"
+                    >
+                      {conn.title}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              <WidgetTitle title="Detail Anime" />
+              <AnimeDetails anime={data} />
+
+              <WidgetTitle title="Link Download" />
+              <DownloadLink anime={{ downloadUrl: data.downloadUrl }} />
+            </Content>
+            <Sidebar>
+              <WidgetTitle title="Sidebar" />
+            </Sidebar>
+          </Sesepuh>
+        </Layout>
+      );
+    }
+
+    return (
+      <Error
+        statusCode={batchInfo.statusCode}
+        message={batchInfo.message || batchInfo.statusMessage}
+      />
+    );
+  }
+}

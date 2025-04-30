@@ -1,0 +1,61 @@
+---
+import Layout from "@layouts/Layout.astro";
+import WidgetTitle from "@components/WidgetTitle.astro";
+import Breadcrumb from "@components/Breadcrumb.astro";
+import Sesepuh from "@components/Sesepuh.astro";
+import Content from "@components/Content.astro";
+import Sidebar from "@components/Sidebar.astro";
+import animeConfig from "@configs/animeConfig";
+import animeByGenreService from "@services/animeByGenreService";
+import AnimeList2 from "@components/AnimeList2.astro";
+import Pagination from "@components/Pagination.astro";
+import Error from "@components/Error.astro";
+
+const {
+  wajiknime: { siteName },
+} = animeConfig;
+const { genreId } = Astro.params;
+const page = Astro.url.searchParams.get("page");
+const animeByGenre = await animeByGenreService({ genreId: genreId! }, { page });
+---
+
+{
+  () => {
+    if (animeByGenre.ok) {
+      const title = `Anime Genre ${genreId} - ${siteName}`;
+
+      return (
+        <Layout
+          seo={{
+            title,
+            description: "",
+          }}
+        >
+          <Breadcrumb />
+          <Sesepuh>
+            <Content>
+              <WidgetTitle title="Anime Genre Action" />
+              <AnimeList2
+                anime={{
+                  list: animeByGenre.data.animeList,
+                  baseUrlPath: "/anime",
+                }}
+              />
+              <Pagination pagination={animeByGenre.pagination} />
+            </Content>
+            <Sidebar>
+              <WidgetTitle title="Sidebar" />
+            </Sidebar>
+          </Sesepuh>
+        </Layout>
+      );
+    }
+
+    return (
+      <Error
+        statusCode={animeByGenre.statusCode}
+        message={animeByGenre.message || animeByGenre.statusMessage}
+      />
+    );
+  }
+}

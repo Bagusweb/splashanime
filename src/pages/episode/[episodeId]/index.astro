@@ -1,0 +1,110 @@
+---
+import Layout from "@layouts/Layout.astro";
+import WidgetTitle from "@components/WidgetTitle.astro";
+import Breadcrumb from "@components/Breadcrumb.astro";
+import Sesepuh from "@components/Sesepuh.astro";
+import Content from "@components/Content.astro";
+import Sidebar from "@components/Sidebar.astro";
+import animeConfig from "@configs/animeConfig";
+import episodeService from "@services/episodeService";
+import AnimeList3 from "@components/AnimeList3.astro";
+import generateUrlPath from "@utils/generateUrlPath";
+import DownloadLink from "@components/DownloadLink.astro";
+import VideoPlayer from "@components/VideoPlayer.astro";
+import Error from "@components/Error.astro";
+
+const {
+  wajiknime: { siteName },
+} = animeConfig;
+const { episodeId } = Astro.params;
+const episode = await episodeService({ episodeId: episodeId! });
+const { data } = episode;
+---
+
+{
+  () => {
+    if (episode.ok) {
+      const title = `Nonton Anime ${data.title} - ${siteName}`;
+
+      return (
+        <Layout
+          seo={{
+            title,
+            description: "",
+          }}
+        >
+          <Breadcrumb
+            currentPage={{
+              title: data.title,
+              href: Astro.url.href,
+              action: "replace",
+            }}
+          />
+          <Sesepuh>
+            <Content>
+              <WidgetTitle title={data.title} />
+              <VideoPlayer
+                anime={{
+                  defaultStreamingUrl: data.defaultStreamingUrl,
+                  server: data.server,
+                }}
+              />
+
+              <div class="flex flex-wrap justify-center gap-4">
+                {data.hasPrevEpisode && data.prevEpisode && (
+                  <a
+                    href={generateUrlPath(
+                      "/episode",
+                      data.prevEpisode.episodeId
+                    )}
+                    class="navigation-episode-item"
+                  >
+                    {"<- "}
+                    {data.prevEpisode.title}
+                  </a>
+                )}
+                <a
+                  href={generateUrlPath("/anime", data.animeId)}
+                  class="navigation-episode-item"
+                >
+                  All Eps
+                </a>
+                {data.hasNextEpisode && data.nextEpisode && (
+                  <a
+                    href={generateUrlPath(
+                      "/episode",
+                      data.nextEpisode.episodeId
+                    )}
+                    class="navigation-episode-item"
+                  >
+                    {data.nextEpisode.title}
+                    {" ->"}
+                  </a>
+                )}
+              </div>
+
+              <WidgetTitle title="Link Download" />
+              <DownloadLink anime={{ downloadUrl: data.downloadUrl }} />
+            </Content>
+            <Sidebar>
+              <WidgetTitle title="Anime Movie" href="/movies" />
+              <AnimeList3
+                anime={{
+                  list: data.movie.animeList,
+                  baseUrlPath: "/anime",
+                }}
+              />
+            </Sidebar>
+          </Sesepuh>
+        </Layout>
+      );
+    }
+
+    return (
+      <Error
+        statusCode={episode.statusCode}
+        message={episode.message || episode.statusMessage}
+      />
+    );
+  }
+}

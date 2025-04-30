@@ -1,0 +1,95 @@
+---
+import Layout from "@layouts/Layout.astro";
+import WidgetTitle from "@components/WidgetTitle.astro";
+import Breadcrumb from "@components/Breadcrumb.astro";
+import Sesepuh from "@components/Sesepuh.astro";
+import Content from "@components/Content.astro";
+import Sidebar from "@components/Sidebar.astro";
+import animeConfig from "@configs/animeConfig";
+import searchService from "@services/searchService";
+import AnimeList2 from "@components/AnimeList2.astro";
+import Pagination from "@components/Pagination.astro";
+import Search from "@components/Search.astro";
+import Error from "@components/Error.astro";
+
+const {
+  wajiknime: { siteName },
+} = animeConfig;
+const q = Astro.url.searchParams.get("q");
+const page = Astro.url.searchParams.get("page");
+const search = await searchService({ q, page });
+---
+
+{
+  () => {
+    if (!q) {
+      const title = `Search | Cari Anime - ${siteName}`;
+
+      return (
+        <Layout
+          seo={{
+            title,
+            description: "",
+          }}
+        >
+          <Breadcrumb />
+          <Sesepuh>
+            <Content>
+              <WidgetTitle title="Cari Anime" />
+              <Search />
+            </Content>
+            <Sidebar>
+              <WidgetTitle title="Sidebar" />
+            </Sidebar>
+          </Sesepuh>
+        </Layout>
+      );
+    }
+
+    if (search.ok) {
+      const title = `Search | Anime ${q} - ${siteName}`;
+
+      return (
+        <Layout
+          seo={{
+            title,
+            description: "",
+          }}
+        >
+          <Breadcrumb
+            currentPage={{
+              title: q,
+              href: Astro.url.href,
+              action: "add",
+            }}
+          />
+          <Sesepuh>
+            <Content>
+              <WidgetTitle title={`Hasil Pencarian : ${q}`} />
+              <AnimeList2
+                anime={{
+                  list: search.data.animeList,
+                  baseUrlPath: "/anime",
+                }}
+              />
+              <Pagination
+                pagination={search.pagination}
+                options={{ qQueryParam: q }}
+              />
+            </Content>
+            <Sidebar>
+              <WidgetTitle title="Sidebar" />
+            </Sidebar>
+          </Sesepuh>
+        </Layout>
+      );
+    }
+
+    return (
+      <Error
+        statusCode={search.statusCode}
+        message={search.message || search.statusMessage}
+      />
+    );
+  }
+}

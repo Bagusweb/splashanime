@@ -1,0 +1,142 @@
+---
+interface Props {
+  pagination: Pagination | null;
+  options?: {
+    qQueryParam?: string | null;
+  };
+}
+
+const { pagination, options } = Astro.props;
+---
+
+{
+  () => {
+    if (pagination) {
+      const {
+        currentPage,
+        hasNextPage,
+        hasPrevPage,
+        nextPage,
+        prevPage,
+        totalPages,
+      } = pagination;
+      const qQueryParam = options?.qQueryParam
+        ? `&q=${options.qQueryParam}`
+        : "";
+
+      return (
+        <div class="flex justify-center gap-2 flex-wrap">
+          {() => {
+            if (hasPrevPage) {
+              return (
+                <a
+                  href={`?page=${prevPage}${qQueryParam}`}
+                  class="pagination-item"
+                >
+                  {"<-"}
+                </a>
+              );
+            }
+          }}
+
+          {() => {
+            if (currentPage) {
+              function renderLinks(
+                values: number[],
+                operator: "plus" | "min",
+                currentPage: number
+              ) {
+                return values.map((num) => {
+                  const to =
+                    operator === "plus" ? currentPage + num : currentPage - num;
+                  const href = `?page=${to}${qQueryParam}`;
+
+                  if (totalPages) {
+                    if (operator === "plus") {
+                      if (to < totalPages + 1) {
+                        return (
+                          <a href={href} class="pagination-item">
+                            {to}
+                          </a>
+                        );
+                      }
+                    } else {
+                      if (to > 0) {
+                        return (
+                          <a href={href} class="pagination-item">
+                            {to}
+                          </a>
+                        );
+                      }
+                    }
+                  }
+                });
+              }
+
+              if (currentPage === 1) {
+                return (
+                  <>
+                    <span class="pagination-item active">{currentPage}</span>
+                    {renderLinks([1, 2, 3, 4], "plus", currentPage)}
+                  </>
+                );
+              }
+
+              if (currentPage === 2) {
+                return (
+                  <>
+                    {renderLinks([1], "min", currentPage)}
+                    <span class="pagination-item active">{currentPage}</span>
+                    {renderLinks([1, 2, 3], "plus", currentPage)}
+                  </>
+                );
+              }
+
+              if (totalPages) {
+                if (currentPage === totalPages - 1) {
+                  return (
+                    <>
+                      {renderLinks([3, 2, 1], "min", currentPage)}
+                      <span class="pagination-item active">{currentPage}</span>
+                      {renderLinks([1], "plus", currentPage)}
+                    </>
+                  );
+                }
+
+                if (currentPage === totalPages) {
+                  return (
+                    <>
+                      {renderLinks([4, 3, 2, 1], "min", currentPage)}
+                      <span class="pagination-item active">{currentPage}</span>
+                    </>
+                  );
+                }
+              }
+
+              return (
+                <>
+                  {renderLinks([2, 1], "min", currentPage)}
+                  <span class="pagination-item active">{currentPage}</span>
+                  {renderLinks([1, 2], "plus", currentPage)}
+                </>
+              );
+            }
+          }}
+
+          {() => {
+            if (hasNextPage) {
+              return (
+                <a
+                  href={`?page=${nextPage}${qQueryParam}`}
+                  class="pagination-item"
+                >
+                  {"->"}
+                </a>
+              );
+            }
+          }}
+        </div>
+      );
+    }
+  }
+}

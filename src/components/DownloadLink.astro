@@ -1,0 +1,37 @@
+---
+interface Props {
+  anime: {
+    downloadUrl: { formats: Format[] };
+  };
+}
+
+const { anime } = Astro.props;
+---
+
+<div class="flex flex-col gap-4" id="download">
+  {
+    anime.downloadUrl.formats.map((format) => (
+      <>
+        <h3 class="text-md font-bold bg-zinc-300 dark:bg-zinc-700 py-2 px-3 rounded-sm">
+          {format.title}
+        </h3>
+        {format.qualities.map((quality) => {
+          if (quality.urls && quality.urls.length > 0) {
+            return (
+              <div>
+                <h3 class="font-bold pb-2">{quality.title}</h3>
+                <div class="flex gap-2 flex-wrap">
+                  {quality.urls?.map((url) => (
+                    <a href={url.url} target="_blank" class="download-url-item">
+                      {url.title}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            );
+          }
+        })}
+      </>
+    ))
+  }
+</div>

@@ -1,0 +1,60 @@
+---
+import Layout from "@layouts/Layout.astro";
+import WidgetTitle from "@components/WidgetTitle.astro";
+import Breadcrumb from "@components/Breadcrumb.astro";
+import Sesepuh from "@components/Sesepuh.astro";
+import Content from "@components/Content.astro";
+import Sidebar from "@components/Sidebar.astro";
+import animeConfig from "@configs/animeConfig";
+import AnimeList1 from "@components/AnimeList1.astro";
+import recentService from "@services/recentService";
+import Pagination from "@components/Pagination.astro";
+import Error from "@components/Error.astro";
+
+const {
+  wajiknime: { siteName },
+} = animeConfig;
+const page = Astro.url.searchParams.get("page");
+const recent = await recentService({ page });
+---
+
+{
+  () => {
+    if (recent.ok) {
+      const title = `Recent | Episode Terbaru - ${siteName}`;
+
+      return (
+        <Layout
+          seo={{
+            title,
+            description: "",
+          }}
+        >
+          <Breadcrumb />
+          <Sesepuh>
+            <Content>
+              <WidgetTitle title="Episode Terbaru" />
+              <AnimeList1
+                anime={{
+                  list: recent.data.animeList,
+                  baseUrlPath: "/anime",
+                }}
+              />
+              <Pagination pagination={recent.pagination} />
+            </Content>
+            <Sidebar>
+              <WidgetTitle title="Sidebar" />
+            </Sidebar>
+          </Sesepuh>
+        </Layout>
+      );
+    }
+
+    return (
+      <Error
+        statusCode={recent.statusCode}
+        message={recent.message || recent.statusMessage}
+      />
+    );
+  }
+}

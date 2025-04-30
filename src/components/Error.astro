@@ -1,0 +1,31 @@
+---
+import Layout from "@layouts/Layout.astro";
+import animeConfig from "@configs/animeConfig";
+
+interface Props {
+  statusCode: number;
+  message: string;
+}
+
+const { statusCode, message } = Astro.props;
+const {
+  wajiknime: { siteName },
+} = animeConfig;
+const title = `${statusCode} ${message} - ${siteName}`;
+---
+
+<Layout
+  seo={{
+    title,
+    noindex: true,
+    nofollow: true,
+  }}
+>
+  <h1 class="text-center text-xl font-extrabold">
+    {statusCode}
+    {message}
+  </h1>
+  <a href={Astro.url.origin} class="text-center text-sky-700 dark:text-sky-400"
+    >Kembali ke halaman utama</a
+  >
+</Layout>

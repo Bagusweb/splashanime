@@ -1,0 +1,105 @@
+---
+import type { AllAnimes } from "@services/animeService";
+import generateUrlPath from "@utils/generateUrlPath";
+import SearchIcon from "./icons/SearchIcon.astro";
+import WidgetTitle from "./WidgetTitle.astro";
+
+interface Props {
+  anime: {
+    list: AllAnimes["list"];
+    baseUrlPath: string;
+  };
+}
+
+const {
+  anime: { list, baseUrlPath },
+} = Astro.props;
+---
+
+<div class="w-full mx-auto">
+  <label
+    for="search-input"
+    class="mb-2 text-sm font-medium text-zinc-900 sr-only dark:text-white"
+    >Search</label
+  >
+  <div class="relative">
+    <div
+      class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+    >
+      <SearchIcon class="w-4 h-4" />
+    </div>
+    <input
+      type="search"
+      id="search-input"
+      class="block w-full p-3 ps-10 text-sm text-zinc-900 border border-zinc-300 rounded-lg bg-zinc-50 focus:ring-amber-500 focus:border-amber-500 dark:bg-zinc-700 dark:border-zinc-600 dark:placeholder-zinc-400 dark:text-white dark:focus:ring-amber-500 dark:focus:border-amber-500"
+      placeholder="Cari Anime..."
+      required
+    />
+  </div>
+</div>
+<p>
+  Belum menemukan anime yg anda inginkan?, cari <a
+    href="/search"
+    class="underline text-amber-700 dark:text-amber-500">disini</a
+  >
+</p>
+{
+  list.map((item) => (
+    <div class="flex flex-col gap-4">
+      <WidgetTitle title={item.startWith} />
+
+      <ul class="anime-list w-full grid sm:grid-cols-2 gap-y-2 gap-x-4 list-disc pl-4">
+        {item.animeList.map((anime) => (
+          <li>
+            <a
+              href={generateUrlPath(baseUrlPath, anime.animeId)}
+              class="anime0-item"
+            >
+              {anime.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  ))
+}
+
+<script>
+  // LOGIC PENCARIAN LANGSUNG
+  const searchInputEl = document.getElementById("search-input");
+
+  if (searchInputEl) {
+    searchInputEl.addEventListener("input", function () {
+      const filterText = (this as HTMLInputElement).value.toLowerCase();
+      const ulElems = document.querySelectorAll("ul.anime-list");
+
+      let exist = false;
+
+      ulElems.forEach((ulEl) => {
+        exist = false;
+
+        const liElems = ulEl.querySelectorAll("li");
+
+        liElems.forEach((liEl) => {
+          const liText = liEl.textContent?.toLowerCase();
+
+          if (liText?.includes(filterText)) {
+            (liEl as HTMLElement).style.display = "";
+
+            exist = true;
+          } else {
+            (liEl as HTMLElement).style.display = "none";
+          }
+        });
+
+        const wrapperEl = ulEl.parentElement as HTMLElement;
+
+        if (!exist) {
+          wrapperEl.style.display = "none";
+        } else {
+          wrapperEl.style.display = "";
+        }
+      });
+    });
+  }
+</script>

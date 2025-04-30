@@ -1,0 +1,110 @@
+---
+import PlayIcon from "./icons/PlayIcon.astro";
+import generateUrlPath from "@utils/generateUrlPath";
+
+interface Props {
+  anime: {
+    list: AnimeCard1[];
+    baseUrlPath: string;
+  };
+}
+
+const {
+  anime: { list, baseUrlPath },
+} = Astro.props;
+---
+
+<div
+  id="controls-carousel"
+  class="relative w-full"
+  data-carousel="slide"
+  data-carousel-interval="6000"
+>
+  <div class="relative h-56 overflow-hidden rounded-md md:h-96">
+    {
+      list.map((anime) => (
+        <div class="hidden carousel-item" data-carousel-item>
+          <div>
+            <img
+              loading="lazy"
+              src={anime.poster}
+              class="carousel-item-image"
+              alt={anime.title}
+            />
+          </div>
+          <div class="carousel-item-layer">
+            <div class="carousel-item-cus">
+              <p class="carousel-item-eps">
+                <span class="text-teal-600">Episode {anime.episodes}</span>
+              </p>
+              <h1 class="carousel-item-title">
+                {anime.title.replace(`Episode ${anime.episodes}`, "").trim()}
+              </h1>
+              <a
+                href={generateUrlPath(baseUrlPath, anime.animeId || "")}
+                class="carousel-item-btn"
+              >
+                <PlayIcon />
+                <span class="text-xs">Tonton Kuy</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+  <div
+    class="absolute z-30 flex md:gap-10 -translate-x-1/2 space-x-3 rtl:space-x-reverse bottom-5 left-1/2"
+  >
+    <button
+      type="button"
+      class="flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+      data-carousel-prev
+    >
+      <span
+        class="inline-flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-zinc-600 dark:bg-zinc-800/30 dark:group-hover:bg-zinc-800/50 dark:group-focus:ring-4 dark:group-focus:ring-zinc-500"
+      >
+        <svg
+          class="w-4 h-4 text-zinc-700 rtl:rotate-180 dark:text-zinc-300"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 6 10"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M5 1 1 5l4 4"></path>
+        </svg>
+        <span class="sr-only">Previous</span>
+      </span>
+    </button>
+    <button
+      type="button"
+      class="flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+      data-carousel-next
+    >
+      <span
+        class="inline-flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-zinc-600 dark:bg-zinc-800/30 dark:group-hover:bg-zinc-800/50 dark:group-focus:ring-4 dark:group-focus:ring-zinc-500"
+      >
+        <svg
+          class="w-4 h-4 text-zinc-700 rtl:rotate-180 dark:text-zinc-300"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 6 10"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="m1 9 4-4-4-4"></path>
+        </svg>
+        <span class="sr-only">Next</span>
+      </span>
+    </button>
+  </div>
+</div>

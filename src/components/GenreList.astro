@@ -1,0 +1,32 @@
+---
+import generateUrlPath from "@utils/generateUrlPath";
+
+interface Props {
+  genre: {
+    list: GenreLinkCard[];
+    baseUrlPath: string;
+  };
+}
+
+const {
+  genre: { list, baseUrlPath },
+} = Astro.props;
+---
+
+<div
+  class="gap-2 grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5"
+>
+  {
+    list.map((genre) => (
+      <button class="genre-item">
+        <a
+          href={generateUrlPath(baseUrlPath, genre.genreId)}
+          type="button"
+          class="line-clamp-1"
+        >
+          {genre.title}
+        </a>
+      </button>
+    ))
+  }
+</div>

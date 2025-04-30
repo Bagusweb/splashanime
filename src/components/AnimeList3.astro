@@ -1,0 +1,52 @@
+---
+import generateUrlPath from "@utils/generateUrlPath";
+
+interface Props {
+  anime: {
+    list: AnimeCard3[];
+    baseUrlPath: string;
+  };
+}
+
+const {
+  anime: { list, baseUrlPath },
+} = Astro.props;
+---
+
+<div class="flex flex-col gap-8 py-3">
+  {
+    list.map((anime) => (
+      <div class="flex gap-4">
+        <a href={generateUrlPath(baseUrlPath, anime.animeId)}>
+          <img
+            loading="lazy"
+            class="anime3-item-img"
+            src={anime.poster}
+            alt={anime.title}
+          />
+        </a>
+        <div class="flex flex-col gap-2">
+          <h3 class="anime3-item-title">
+            <a href={generateUrlPath(baseUrlPath, anime.animeId)}>
+              {anime.title}
+            </a>
+          </h3>
+          <div class="text-sm line-clamp-2">
+            <span class="font-bold">Genres : </span>
+            {anime.genreList.map((genre, index) => (
+              <a
+                href={generateUrlPath("/genres", genre.genreId)}
+                class="hover:text-amber-700 dark:hover:text-amber-500"
+              >
+                {index !== anime.genreList.length - 1
+                  ? `${genre.title},`
+                  : genre.title}
+              </a>
+            ))}
+          </div>
+          <p class="anime3-item-date">{anime.releaseDate}</p>
+        </div>
+      </div>
+    ))
+  }
+</div>

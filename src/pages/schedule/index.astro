@@ -1,0 +1,57 @@
+---
+import Layout from "@layouts/Layout.astro";
+import WidgetTitle from "@components/WidgetTitle.astro";
+import Breadcrumb from "@components/Breadcrumb.astro";
+import Sesepuh from "@components/Sesepuh.astro";
+import Content from "@components/Content.astro";
+import Sidebar from "@components/Sidebar.astro";
+import animeConfig from "@configs/animeConfig";
+import scheduleService from "@services/scheduleService";
+import AnimeList4 from "@components/AnimeList4.astro";
+import Error from "@components/Error.astro";
+
+const {
+  wajiknime: { siteName },
+} = animeConfig;
+const schedule = await scheduleService();
+---
+
+{
+  () => {
+    if (schedule.ok) {
+      const title = `Schedule | Jadwal Rilis - ${siteName}`;
+
+      return (
+        <Layout
+          seo={{
+            title,
+            description: "",
+          }}
+        >
+          <Breadcrumb />
+          <Sesepuh>
+            <Content>
+              <WidgetTitle title="Jadwal Rilis" />
+              <AnimeList4
+                anime={{
+                  days: schedule.data.days,
+                  baseUrlPath: "/anime",
+                }}
+              />
+            </Content>
+            <Sidebar>
+              <WidgetTitle title="Sidebar" />
+            </Sidebar>
+          </Sesepuh>
+        </Layout>
+      );
+    }
+
+    return (
+      <Error
+        statusCode={schedule.statusCode}
+        message={schedule.message || schedule.statusMessage}
+      />
+    );
+  }
+}
