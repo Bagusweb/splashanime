@@ -18,7 +18,7 @@ interface AnimeConfig {
 const animeConfig: AnimeConfig = {
   wajiknime: {
     siteName: "Splashanime",
-    description: "Nonton anime gratis ga pake karcis hanya di Wajiknime",
+    description: "Nonton anime gratis ga pake karcis hanya di Splashanime",
     logo: "/images/logo.png",
     favicon: "/favicon.png",
     image: "/images/wajiknime.jpg",
