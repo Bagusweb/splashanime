@@ -14,7 +14,7 @@ export default defineConfig({
     },
   },
 
-  output: "server", // ✅ tetap server karena vercel/serverless mendukungnya
+  output: "static", // ✅ tetap server karena vercel/serverless mendukungnya
 
   adapter: vercel(), // ✅ ini menggantikan `node()`
 
