@@ -1,4 +1,4 @@
-import { e as createComponent, r as renderTemplate, m as maybeRenderHead, g as addAttribute, i as renderComponent, h as createAstro, j as Fragment } from './astro/server_DZ0WCwcG.mjs';
+import { c as createComponent, a as createAstro, m as maybeRenderHead, d as addAttribute, r as renderTemplate, b as renderComponent, F as Fragment } from './astro/server_D5mPY-J_.mjs';
 import 'kleur/colors';
 
 const $$Astro = createAstro();
@@ -63,6 +63,6 @@ const $$Pagination = createComponent(($$result, $$props, $$slots) => {
       }}</div>`;
     }
   }}`;
-}, "C:/laragon/www/wajiknime-main/src/components/Pagination.astro", void 0);
+}, "C:/laragon/www/Splashanime-id/src/components/Pagination.astro", void 0);
 
 export { $$Pagination as $ };

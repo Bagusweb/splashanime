@@ -1,4 +1,4 @@
-import { e as createComponent, r as renderTemplate, m as maybeRenderHead, g as addAttribute, h as createAstro } from './astro/server_DZ0WCwcG.mjs';
+import { c as createComponent, a as createAstro, m as maybeRenderHead, d as addAttribute, r as renderTemplate } from './astro/server_D5mPY-J_.mjs';
 import 'kleur/colors';
 import 'clsx';
 import { g as generateUrlPath } from './generateUrlPath_Bu-CsIBe.mjs';
@@ -14,6 +14,6 @@ const $$AnimeList1 = createComponent(($$result, $$props, $$slots) => {
     baseUrlPath,
     anime.animeId || anime.batchId || ""
   ), "href")} class="group relative"> <div class="relative overflow-hidden rounded-lg"> <img loading="lazy" class="anime1-item-img"${addAttribute(anime.poster, "src")}${addAttribute(anime.title, "alt")}> <span class="anime1-item-eps">Ep ${anime.episodes}</span> </div> <div class="p-2"> <h3 class="anime1-item-title">${anime.title}</h3> </div> </a>`)} </div>`;
-}, "C:/laragon/www/wajiknime-main/src/components/AnimeList1.astro", void 0);
+}, "C:/laragon/www/Splashanime-id/src/components/AnimeList1.astro", void 0);
 
 export { $$AnimeList1 as $ };

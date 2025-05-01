@@ -1,6 +1,6 @@
-import { a as animeConfig } from '../../../chunks/animeConfig_Do2EemRP.mjs';
+import { a as animeConfig } from '../../../chunks/animeConfig_DiI4YoYj.mjs';
 import { g as generateUrlPath } from '../../../chunks/generateUrlPath_Bu-CsIBe.mjs';
-export { renderers } from '../../../renderers.mjs';
+export { r as renderers } from '../../../chunks/internal_BsTt5pTQ.mjs';
 
 const {
   wajikAnimeApi: { apiUrl, baseUrlPath }

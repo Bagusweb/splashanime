@@ -4,6 +4,13 @@ function appendForwardSlash(path) {
 function prependForwardSlash(path) {
   return path[0] === "/" ? path : "/" + path;
 }
+const MANY_TRAILING_SLASHES = /\/{2,}$/g;
+function collapseDuplicateTrailingSlashes(path, trailingSlash) {
+  if (!path) {
+    return path;
+  }
+  return path.replace(MANY_TRAILING_SLASHES, trailingSlash ? "/" : "") || "/";
+}
 function removeTrailingForwardSlash(path) {
   return path.endsWith("/") ? path.slice(0, path.length - 1) : path;
 }
@@ -37,5 +44,9 @@ function fileExtension(path) {
   const ext = path.split(".").pop();
   return ext !== path ? `.${ext}` : "";
 }
+const WITH_FILE_EXT = /\/[^/]+\.\w+$/;
+function hasFileExtension(path) {
+  return WITH_FILE_EXT.test(path);
+}
 
-export { appendForwardSlash as a, fileExtension as f, isRemotePath as i, joinPaths as j, prependForwardSlash as p, removeTrailingForwardSlash as r, slash as s, trimSlashes as t };
+export { appendForwardSlash as a, collapseDuplicateTrailingSlashes as c, fileExtension as f, hasFileExtension as h, isRemotePath as i, joinPaths as j, prependForwardSlash as p, removeTrailingForwardSlash as r, slash as s, trimSlashes as t };

@@ -1,4 +1,4 @@
-import { e as createComponent, r as renderTemplate, m as maybeRenderHead, i as renderComponent, h as createAstro, g as addAttribute, j as Fragment } from './astro/server_DZ0WCwcG.mjs';
+import { c as createComponent, a as createAstro, m as maybeRenderHead, b as renderComponent, F as Fragment, r as renderTemplate, d as addAttribute } from './astro/server_D5mPY-J_.mjs';
 import 'kleur/colors';
 
 const $$Astro = createAstro();
@@ -11,6 +11,6 @@ const $$DownloadLink = createComponent(($$result, $$props, $$slots) => {
       return renderTemplate`<div> <h3 class="font-bold pb-2">${quality.title}</h3> <div class="flex gap-2 flex-wrap"> ${quality.urls?.map((url) => renderTemplate`<a${addAttribute(url.url, "href")} target="_blank" class="download-url-item"> ${url.title} </a>`)} </div> </div>`;
     }
   })}` })}`)} </div>`;
-}, "C:/laragon/www/wajiknime-main/src/components/DownloadLink.astro", void 0);
+}, "C:/laragon/www/Splashanime-id/src/components/DownloadLink.astro", void 0);
 
 export { $$DownloadLink as $ };

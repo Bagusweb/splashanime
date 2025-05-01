@@ -1,4 +1,4 @@
-import { e as createComponent, r as renderTemplate, m as maybeRenderHead, g as addAttribute, h as createAstro, l as renderSlot } from './astro/server_DZ0WCwcG.mjs';
+import { c as createComponent, a as createAstro, m as maybeRenderHead, d as addAttribute, r as renderTemplate, h as renderSlot } from './astro/server_D5mPY-J_.mjs';
 import 'kleur/colors';
 import 'clsx';
 
@@ -10,7 +10,7 @@ const $$WidgetTitle = createComponent(($$result, $$props, $$slots) => {
   return renderTemplate`${maybeRenderHead()}<div class="flex justify-between gap-4 flex-wrap"> <h1 class="text-lg font-bold line-clamp-2">${title}</h1> ${href && renderTemplate`<a${addAttribute(href, "href")} type="button" class="text-white bg-amber-700 hover:bg-amber-800 focus:ring-4 focus:outline-none focus:ring-amber-300 font-medium rounded-lg text-xs px-3 py-2 text-center inline-flex items-center dark:bg-amber-600 dark:hover:bg-amber-700">
 More
 <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"></path> </svg> </a>`} </div> <hr class="border-zinc-400 dark:border-zinc-600">`;
-}, "C:/laragon/www/wajiknime-main/src/components/WidgetTitle.astro", void 0);
+}, "C:/laragon/www/Splashanime-id/src/components/WidgetTitle.astro", void 0);
 
 function convertIdToTitle(str) {
   return str.split("-").map((item) => {
@@ -48,18 +48,18 @@ Home
     }
     return renderTemplate`<li> <div class="flex items-center"> <svg class="rtl:rotate-180 block w-3 h-3 mx-1 text-zinc-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"></path> </svg> <a${addAttribute(page.href, "href")} class="ms-1 text-sm font-medium hover:text-amber-600 md:ms-2"> ${page.title} </a> </div> </li>`;
   })} </ol> </header>`;
-}, "C:/laragon/www/wajiknime-main/src/components/Breadcrumb.astro", void 0);
+}, "C:/laragon/www/Splashanime-id/src/components/Breadcrumb.astro", void 0);
 
 const $$Sesepuh = createComponent(($$result, $$props, $$slots) => {
   return renderTemplate`${maybeRenderHead()}<div class="flex flex-col lg:flex-row gap-4"> ${renderSlot($$result, $$slots["default"])} </div>`;
-}, "C:/laragon/www/wajiknime-main/src/components/Sesepuh.astro", void 0);
+}, "C:/laragon/www/Splashanime-id/src/components/Sesepuh.astro", void 0);
 
 const $$Content = createComponent(($$result, $$props, $$slots) => {
   return renderTemplate`${maybeRenderHead()}<div class="flex flex-col gap-4 border border-zinc-300 dark:border-zinc-800 bg-white dark:bg-zinc-900 rounded-lg p-3 md:flex-[3]"> ${renderSlot($$result, $$slots["default"])} </div>`;
-}, "C:/laragon/www/wajiknime-main/src/components/Content.astro", void 0);
+}, "C:/laragon/www/Splashanime-id/src/components/Content.astro", void 0);
 
 const $$Sidebar = createComponent(($$result, $$props, $$slots) => {
   return renderTemplate`${maybeRenderHead()}<aside class="flex flex-col border border-zinc-300 dark:border-zinc-800 bg-white dark:bg-zinc-900 gap-4 rounded-lg p-3 md:flex-1"> ${renderSlot($$result, $$slots["default"])} </aside>`;
-}, "C:/laragon/www/wajiknime-main/src/components/Sidebar.astro", void 0);
+}, "C:/laragon/www/Splashanime-id/src/components/Sidebar.astro", void 0);
 
 export { $$Breadcrumb as $, $$Sesepuh as a, $$Content as b, $$WidgetTitle as c, $$Sidebar as d };

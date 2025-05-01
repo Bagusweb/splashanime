@@ -1,8 +1,8 @@
-import { e as createComponent, r as renderTemplate, g as addAttribute, h as createAstro, s as spreadAttributes, u as unescapeHTML, i as renderComponent, m as maybeRenderHead, k as renderScript, l as renderSlot, n as renderHead } from './astro/server_DZ0WCwcG.mjs';
+import { c as createComponent, a as createAstro, d as addAttribute, r as renderTemplate, s as spreadAttributes, u as unescapeHTML, b as renderComponent, m as maybeRenderHead, e as renderScript, h as renderSlot, i as renderHead } from './astro/server_D5mPY-J_.mjs';
 import 'kleur/colors';
 /* empty css                         */
 import 'clsx';
-import { a as animeConfig } from './animeConfig_Do2EemRP.mjs';
+import { a as animeConfig } from './animeConfig_DiI4YoYj.mjs';
 
 const $$Astro$f = createAstro();
 const $$OpenGraphArticleTags = createComponent(($$result, $$props, $$slots) => {
@@ -10,7 +10,7 @@ const $$OpenGraphArticleTags = createComponent(($$result, $$props, $$slots) => {
   Astro2.self = $$OpenGraphArticleTags;
   const { publishedTime, modifiedTime, expirationTime, authors, section, tags } = Astro2.props.openGraph.article;
   return renderTemplate`${publishedTime ? renderTemplate`<meta property="article:published_time"${addAttribute(publishedTime, "content")}>` : null}${modifiedTime ? renderTemplate`<meta property="article:modified_time"${addAttribute(modifiedTime, "content")}>` : null}${expirationTime ? renderTemplate`<meta property="article:expiration_time"${addAttribute(expirationTime, "content")}>` : null}${authors ? authors.map((author) => renderTemplate`<meta property="article:author"${addAttribute(author, "content")}>`) : null}${section ? renderTemplate`<meta property="article:section"${addAttribute(section, "content")}>` : null}${tags ? tags.map((tag) => renderTemplate`<meta property="article:tag"${addAttribute(tag, "content")}>`) : null}`;
-}, "C:/laragon/www/wajiknime-main/node_modules/astro-seo/src/components/OpenGraphArticleTags.astro", void 0);
+}, "C:/laragon/www/Splashanime-id/node_modules/astro-seo/src/components/OpenGraphArticleTags.astro", void 0);
 
 const $$Astro$e = createAstro();
 const $$OpenGraphBasicTags = createComponent(($$result, $$props, $$slots) => {
@@ -18,7 +18,7 @@ const $$OpenGraphBasicTags = createComponent(($$result, $$props, $$slots) => {
   Astro2.self = $$OpenGraphBasicTags;
   const { openGraph } = Astro2.props;
   return renderTemplate`<meta property="og:title"${addAttribute(openGraph.basic.title, "content")}><meta property="og:type"${addAttribute(openGraph.basic.type, "content")}><meta property="og:image"${addAttribute(openGraph.basic.image, "content")}><meta property="og:url"${addAttribute(openGraph.basic.url || Astro2.url.href, "content")}>`;
-}, "C:/laragon/www/wajiknime-main/node_modules/astro-seo/src/components/OpenGraphBasicTags.astro", void 0);
+}, "C:/laragon/www/Splashanime-id/node_modules/astro-seo/src/components/OpenGraphBasicTags.astro", void 0);
 
 const $$Astro$d = createAstro();
 const $$OpenGraphImageTags = createComponent(($$result, $$props, $$slots) => {
@@ -27,7 +27,7 @@ const $$OpenGraphImageTags = createComponent(($$result, $$props, $$slots) => {
   const { image } = Astro2.props.openGraph.basic;
   const { secureUrl, type, width, height, alt } = Astro2.props.openGraph.image;
   return renderTemplate`<meta property="og:image:url"${addAttribute(image, "content")}>${secureUrl ? renderTemplate`<meta property="og:image:secure_url"${addAttribute(secureUrl, "content")}>` : null}${type ? renderTemplate`<meta property="og:image:type"${addAttribute(type, "content")}>` : null}${width ? renderTemplate`<meta property="og:image:width"${addAttribute(width, "content")}>` : null}${height ? renderTemplate`<meta property="og:image:height"${addAttribute(height, "content")}>` : null}${alt ? renderTemplate`<meta property="og:image:alt"${addAttribute(alt, "content")}>` : null}`;
-}, "C:/laragon/www/wajiknime-main/node_modules/astro-seo/src/components/OpenGraphImageTags.astro", void 0);
+}, "C:/laragon/www/Splashanime-id/node_modules/astro-seo/src/components/OpenGraphImageTags.astro", void 0);
 
 const $$Astro$c = createAstro();
 const $$OpenGraphOptionalTags = createComponent(($$result, $$props, $$slots) => {
@@ -35,7 +35,7 @@ const $$OpenGraphOptionalTags = createComponent(($$result, $$props, $$slots) => 
   Astro2.self = $$OpenGraphOptionalTags;
   const { optional } = Astro2.props.openGraph;
   return renderTemplate`${optional.audio ? renderTemplate`<meta property="og:audio"${addAttribute(optional.audio, "content")}>` : null}${optional.description ? renderTemplate`<meta property="og:description"${addAttribute(optional.description, "content")}>` : null}${optional.determiner ? renderTemplate`<meta property="og:determiner"${addAttribute(optional.determiner, "content")}>` : null}${optional.locale ? renderTemplate`<meta property="og:locale"${addAttribute(optional.locale, "content")}>` : null}${optional.localeAlternate?.map((locale) => renderTemplate`<meta property="og:locale:alternate"${addAttribute(locale, "content")}>`)}${optional.siteName ? renderTemplate`<meta property="og:site_name"${addAttribute(optional.siteName, "content")}>` : null}${optional.video ? renderTemplate`<meta property="og:video"${addAttribute(optional.video, "content")}>` : null}`;
-}, "C:/laragon/www/wajiknime-main/node_modules/astro-seo/src/components/OpenGraphOptionalTags.astro", void 0);
+}, "C:/laragon/www/Splashanime-id/node_modules/astro-seo/src/components/OpenGraphOptionalTags.astro", void 0);
 
 const $$Astro$b = createAstro();
 const $$ExtendedTags = createComponent(($$result, $$props, $$slots) => {
@@ -43,7 +43,7 @@ const $$ExtendedTags = createComponent(($$result, $$props, $$slots) => {
   Astro2.self = $$ExtendedTags;
   const { props } = Astro2;
   return renderTemplate`${props.extend.link?.map((attributes) => renderTemplate`<link${spreadAttributes(attributes)}>`)}${props.extend.meta?.map(({ content, httpEquiv, media, name, property }) => renderTemplate`<meta${addAttribute(name, "name")}${addAttribute(property, "property")}${addAttribute(content, "content")}${addAttribute(httpEquiv, "http-equiv")}${addAttribute(media, "media")}>`)}`;
-}, "C:/laragon/www/wajiknime-main/node_modules/astro-seo/src/components/ExtendedTags.astro", void 0);
+}, "C:/laragon/www/Splashanime-id/node_modules/astro-seo/src/components/ExtendedTags.astro", void 0);
 
 const $$Astro$a = createAstro();
 const $$TwitterTags = createComponent(($$result, $$props, $$slots) => {
@@ -51,7 +51,7 @@ const $$TwitterTags = createComponent(($$result, $$props, $$slots) => {
   Astro2.self = $$TwitterTags;
   const { card, site, title, creator, description, image, imageAlt } = Astro2.props.twitter;
   return renderTemplate`${card ? renderTemplate`<meta name="twitter:card"${addAttribute(card, "content")}>` : null}${site ? renderTemplate`<meta name="twitter:site"${addAttribute(site, "content")}>` : null}${title ? renderTemplate`<meta name="twitter:title"${addAttribute(title, "content")}>` : null}${image ? renderTemplate`<meta name="twitter:image"${addAttribute(image, "content")}>` : null}${imageAlt ? renderTemplate`<meta name="twitter:image:alt"${addAttribute(imageAlt, "content")}>` : null}${description ? renderTemplate`<meta name="twitter:description"${addAttribute(description, "content")}>` : null}${creator ? renderTemplate`<meta name="twitter:creator"${addAttribute(creator, "content")}>` : null}`;
-}, "C:/laragon/www/wajiknime-main/node_modules/astro-seo/src/components/TwitterTags.astro", void 0);
+}, "C:/laragon/www/Splashanime-id/node_modules/astro-seo/src/components/TwitterTags.astro", void 0);
 
 const $$Astro$9 = createAstro();
 const $$LanguageAlternatesTags = createComponent(($$result, $$props, $$slots) => {
@@ -59,7 +59,7 @@ const $$LanguageAlternatesTags = createComponent(($$result, $$props, $$slots) =>
   Astro2.self = $$LanguageAlternatesTags;
   const { languageAlternates } = Astro2.props;
   return renderTemplate`${languageAlternates.map((alternate) => renderTemplate`<link rel="alternate"${addAttribute(alternate.hrefLang, "hreflang")}${addAttribute(alternate.href, "href")}>`)}`;
-}, "C:/laragon/www/wajiknime-main/node_modules/astro-seo/src/components/LanguageAlternatesTags.astro", void 0);
+}, "C:/laragon/www/Splashanime-id/node_modules/astro-seo/src/components/LanguageAlternatesTags.astro", void 0);
 
 const $$Astro$8 = createAstro();
 const $$SEO = createComponent(($$result, $$props, $$slots) => {
@@ -100,7 +100,7 @@ const $$SEO = createComponent(($$result, $$props, $$slots) => {
   const baseUrl = Astro2.site ?? Astro2.url;
   const defaultCanonicalUrl = new URL(Astro2.url.pathname + Astro2.url.search, baseUrl);
   return renderTemplate`${updatedTitle ? renderTemplate`<title>${unescapeHTML(updatedTitle)}</title>` : null}${Astro2.props.charset ? renderTemplate`<meta${addAttribute(Astro2.props.charset, "charset")}>` : null}<link rel="canonical"${addAttribute(Astro2.props.canonical || defaultCanonicalUrl.href, "href")}>${Astro2.props.description ? renderTemplate`<meta name="description"${addAttribute(Astro2.props.description, "content")}>` : null}<meta name="robots"${addAttribute(`${Astro2.props.noindex ? "noindex" : "index"}, ${Astro2.props.nofollow ? "nofollow" : "follow"}`, "content")}>${Astro2.props.openGraph && renderTemplate`${renderComponent($$result, "OpenGraphBasicTags", $$OpenGraphBasicTags, { ...Astro2.props })}`}${Astro2.props.openGraph?.optional && renderTemplate`${renderComponent($$result, "OpenGraphOptionalTags", $$OpenGraphOptionalTags, { ...Astro2.props })}`}${Astro2.props.openGraph?.image && renderTemplate`${renderComponent($$result, "OpenGraphImageTags", $$OpenGraphImageTags, { ...Astro2.props })}`}${Astro2.props.openGraph?.article && renderTemplate`${renderComponent($$result, "OpenGraphArticleTags", $$OpenGraphArticleTags, { ...Astro2.props })}`}${Astro2.props.twitter && renderTemplate`${renderComponent($$result, "TwitterTags", $$TwitterTags, { ...Astro2.props })}`}${Astro2.props.extend && renderTemplate`${renderComponent($$result, "ExtendedTags", $$ExtendedTags, { ...Astro2.props })}`}${Astro2.props.languageAlternates && renderTemplate`${renderComponent($$result, "LanguageAlternatesTags", $$LanguageAlternatesTags, { ...Astro2.props })}`}`;
-}, "C:/laragon/www/wajiknime-main/node_modules/astro-seo/src/SEO.astro", void 0);
+}, "C:/laragon/www/Splashanime-id/node_modules/astro-seo/src/SEO.astro", void 0);
 
 const $$Astro$7 = createAstro();
 const $$CoffeIcon = createComponent(($$result, $$props, $$slots) => {
@@ -108,7 +108,7 @@ const $$CoffeIcon = createComponent(($$result, $$props, $$slots) => {
   Astro2.self = $$CoffeIcon;
   const props = Astro2.props;
   return renderTemplate`${maybeRenderHead()}<svg${spreadAttributes(props)} class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M2,21H20V19H2M20,8H18V5H20M20,3H4V13A4,4 0 0,0 8,17H14A4,4 0 0,0 18,13V10H20A2,2 0 0,0 22,8V5C22,3.89 21.1,3 20,3Z"></path></svg>`;
-}, "C:/laragon/www/wajiknime-main/src/components/icons/CoffeIcon.astro", void 0);
+}, "C:/laragon/www/Splashanime-id/src/components/icons/CoffeIcon.astro", void 0);
 
 const $$Astro$6 = createAstro();
 const $$GithubIcon = createComponent(($$result, $$props, $$slots) => {
@@ -116,7 +116,7 @@ const $$GithubIcon = createComponent(($$result, $$props, $$slots) => {
   Astro2.self = $$GithubIcon;
   const props = Astro2.props;
   return renderTemplate`${maybeRenderHead()}<svg${spreadAttributes(props)} class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"> <path fill-rule="evenodd" d="M12.006 2a9.847 9.847 0 0 0-6.484 2.44 10.32 10.32 0 0 0-3.393 6.17 10.48 10.48 0 0 0 1.317 6.955 10.045 10.045 0 0 0 5.4 4.418c.504.095.683-.223.683-.494 0-.245-.01-1.052-.014-1.908-2.78.62-3.366-1.21-3.366-1.21a2.711 2.711 0 0 0-1.11-1.5c-.907-.637.07-.621.07-.621.317.044.62.163.885.346.266.183.487.426.647.71.135.253.318.476.538.655a2.079 2.079 0 0 0 2.37.196c.045-.52.27-1.006.635-1.37-2.219-.259-4.554-1.138-4.554-5.07a4.022 4.022 0 0 1 1.031-2.75 3.77 3.77 0 0 1 .096-2.713s.839-.275 2.749 1.05a9.26 9.26 0 0 1 5.004 0c1.906-1.325 2.74-1.05 2.74-1.05.37.858.406 1.828.101 2.713a4.017 4.017 0 0 1 1.029 2.75c0 3.939-2.339 4.805-4.564 5.058a2.471 2.471 0 0 1 .679 1.897c0 1.372-.012 2.477-.012 2.814 0 .272.18.592.687.492a10.05 10.05 0 0 0 5.388-4.421 10.473 10.473 0 0 0 1.313-6.948 10.32 10.32 0 0 0-3.39-6.165A9.847 9.847 0 0 0 12.007 2Z" clip-rule="evenodd"></path> </svg>`;
-}, "C:/laragon/www/wajiknime-main/src/components/icons/GithubIcon.astro", void 0);
+}, "C:/laragon/www/Splashanime-id/src/components/icons/GithubIcon.astro", void 0);
 
 const $$Astro$5 = createAstro();
 const $$Footer = createComponent(($$result, $$props, $$slots) => {
@@ -132,7 +132,7 @@ This site does not store any files on our server, we are linked to the
 </p> </div> <div class="grid grid-cols-2 gap-16"> <ul class="flex flex-col gap-4 text-zinc-500 dark:text-zinc-400 font-medium"> ${navLinks._1.map((link) => renderTemplate`<li> <a${addAttribute(link.href, "href")} class="hover:underline max-w-min"> ${link.title} </a> </li>`)} </ul> <ul class="flex flex-col gap-4 text-zinc-500 dark:text-zinc-400 font-medium"> ${navLinks._2.map((link) => renderTemplate`<li> <a${addAttribute(link.href, "href")}${addAttribute(link.targetBlank ? "_blank" : "", "target")} class="hover:underline max-w-min"> ${link.title} </a> </li>`)} </ul> </div> </div> <hr class="my-6 border-zinc-200 sm:mx-auto dark:border-zinc-700 lg:my-8"> <div class="sm:flex sm:items-center sm:justify-between"> <span class="text-sm text-zinc-500 sm:text-center dark:text-zinc-400">© ${(/* @__PURE__ */ new Date()).getFullYear()} <a${addAttribute(Astro2.url.origin, "href")} class="hover:underline">${siteName}™</a>. All
         Rights Reserved.
 </span> <div class="flex mt-4 sm:justify-center sm:mt-0"> <a href="https://github.com/bagusweb" target="_blank" class="text-zinc-500 hover:text-zinc-900 dark:hover:text-white ms-5"> ${renderComponent($$result, "GithubIcon", $$GithubIcon, {})} </a> <a href="https://saweria.co/baguserlangga" target="_blank" class="text-zinc-500 hover:text-zinc-900 dark:hover:text-white ms-5"> ${renderComponent($$result, "CoffeIcon", $$CoffeIcon, {})} </a> </div> </div> </div> </footer>`;
-}, "C:/laragon/www/wajiknime-main/src/components/Footer.astro", void 0);
+}, "C:/laragon/www/Splashanime-id/src/components/Footer.astro", void 0);
 
 const $$Astro$4 = createAstro();
 const $$SearchIcon = createComponent(($$result, $$props, $$slots) => {
@@ -140,7 +140,7 @@ const $$SearchIcon = createComponent(($$result, $$props, $$slots) => {
   Astro2.self = $$SearchIcon;
   const props = Astro2.props;
   return renderTemplate`${maybeRenderHead()}<svg${spreadAttributes(props)} class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"> <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"></path> </svg>`;
-}, "C:/laragon/www/wajiknime-main/src/components/icons/SearchIcon.astro", void 0);
+}, "C:/laragon/www/Splashanime-id/src/components/icons/SearchIcon.astro", void 0);
 
 const $$Astro$3 = createAstro();
 const $$MoonIcon = createComponent(($$result, $$props, $$slots) => {
@@ -148,7 +148,7 @@ const $$MoonIcon = createComponent(($$result, $$props, $$slots) => {
   Astro2.self = $$MoonIcon;
   const props = Astro2.props;
   return renderTemplate`${maybeRenderHead()}<svg${spreadAttributes(props)} class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"> <path fill-rule="evenodd" d="M11.675 2.015a.998.998 0 0 0-.403.011C6.09 2.4 2 6.722 2 12c0 5.523 4.477 10 10 10 4.356 0 8.058-2.784 9.43-6.667a1 1 0 0 0-1.02-1.33c-.08.006-.105.005-.127.005h-.001l-.028-.002A5.227 5.227 0 0 0 20 14a8 8 0 0 1-8-8c0-.952.121-1.752.404-2.558a.996.996 0 0 0 .096-.428V3a1 1 0 0 0-.825-.985Z" clip-rule="evenodd"></path> </svg>`;
-}, "C:/laragon/www/wajiknime-main/src/components/icons/MoonIcon.astro", void 0);
+}, "C:/laragon/www/Splashanime-id/src/components/icons/MoonIcon.astro", void 0);
 
 const $$Astro$2 = createAstro();
 const $$SunIcon = createComponent(($$result, $$props, $$slots) => {
@@ -156,7 +156,7 @@ const $$SunIcon = createComponent(($$result, $$props, $$slots) => {
   Astro2.self = $$SunIcon;
   const props = Astro2.props;
   return renderTemplate`${maybeRenderHead()}<svg${spreadAttributes(props)} class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"> <path fill-rule="evenodd" d="M13 3a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0V3ZM6.343 4.929A1 1 0 0 0 4.93 6.343l1.414 1.414a1 1 0 0 0 1.414-1.414L6.343 4.929Zm12.728 1.414a1 1 0 0 0-1.414-1.414l-1.414 1.414a1 1 0 0 0 1.414 1.414l1.414-1.414ZM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm-9 4a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H3Zm16 0a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2h-2ZM7.757 17.657a1 1 0 1 0-1.414-1.414l-1.414 1.414a1 1 0 1 0 1.414 1.414l1.414-1.414Zm9.9-1.414a1 1 0 0 0-1.414 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414ZM13 19a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0v-2Z" clip-rule="evenodd"></path> </svg>`;
-}, "C:/laragon/www/wajiknime-main/src/components/icons/SunIcon.astro", void 0);
+}, "C:/laragon/www/Splashanime-id/src/components/icons/SunIcon.astro", void 0);
 
 const $$Astro$1 = createAstro();
 const $$Navbar = createComponent(($$result, $$props, $$slots) => {
@@ -171,8 +171,8 @@ const $$Navbar = createComponent(($$result, $$props, $$slots) => {
       return renderTemplate`<li> <a${addAttribute(link.href, "href")} class="navbar-link-item active"> ${link.title} </a> </li>`;
     }
     return renderTemplate`<li> <a${addAttribute(link.href, "href")} class="navbar-link-item"> ${link.title} </a> </li>`;
-  })} </ul> </div> </div> </nav> ${renderScript($$result, "C:/laragon/www/wajiknime-main/src/components/Navbar.astro?astro&type=script&index=0&lang.ts")}`;
-}, "C:/laragon/www/wajiknime-main/src/components/Navbar.astro", void 0);
+  })} </ul> </div> </div> </nav> ${renderScript($$result, "C:/laragon/www/Splashanime-id/src/components/Navbar.astro?astro&type=script&index=0&lang.ts")}`;
+}, "C:/laragon/www/Splashanime-id/src/components/Navbar.astro", void 0);
 
 var __freeze = Object.freeze;
 var __defProp = Object.defineProperty;
@@ -243,7 +243,7 @@ const $$Layout = createComponent(($$result, $$props, $$slots) => {
         targetBlank: true
       }
     ]
-  } }), renderScript($$result, "C:/laragon/www/wajiknime-main/src/layouts/Layout.astro?astro&type=script&index=0&lang.ts"));
-}, "C:/laragon/www/wajiknime-main/src/layouts/Layout.astro", void 0);
+  } }), renderScript($$result, "C:/laragon/www/Splashanime-id/src/layouts/Layout.astro?astro&type=script&index=0&lang.ts"));
+}, "C:/laragon/www/Splashanime-id/src/layouts/Layout.astro", void 0);
 
 export { $$Layout as $, $$SearchIcon as a };

@@ -1,10 +1,10 @@
 /* empty css                                 */
-import { e as createComponent, r as renderTemplate, i as renderComponent, h as createAstro, m as maybeRenderHead } from '../chunks/astro/server_DZ0WCwcG.mjs';
+import { c as createComponent, a as createAstro, b as renderComponent, r as renderTemplate, m as maybeRenderHead } from '../chunks/astro/server_D5mPY-J_.mjs';
 import 'kleur/colors';
-import { $ as $$Layout } from '../chunks/Layout_CE6bR149.mjs';
-import { $ as $$Breadcrumb, a as $$Sesepuh, b as $$Content, c as $$WidgetTitle, d as $$Sidebar } from '../chunks/Sidebar_DIhvNzhx.mjs';
-import { a as animeConfig } from '../chunks/animeConfig_Do2EemRP.mjs';
-export { renderers } from '../renderers.mjs';
+import { $ as $$Layout } from '../chunks/Layout_RqaztM_6.mjs';
+import { $ as $$Breadcrumb, a as $$Sesepuh, b as $$Content, c as $$WidgetTitle, d as $$Sidebar } from '../chunks/Sidebar_YrSnbYdG.mjs';
+import { a as animeConfig } from '../chunks/animeConfig_DiI4YoYj.mjs';
+export { r as renderers } from '../chunks/internal_BsTt5pTQ.mjs';
 
 const $$Astro = createAstro();
 const $$Index = createComponent(($$result, $$props, $$slots) => {
@@ -35,9 +35,9 @@ ${Astro2.url.hostname} operates as an index and database of anime content found
         other trademarks, logos, and images are the property of their respective
         and rightful owners.
 </p> ` })} ${renderComponent($$result3, "Sidebar", $$Sidebar, {}, { "default": ($$result4) => renderTemplate` ${renderComponent($$result4, "WidgetTitle", $$WidgetTitle, { "title": "Sidebar" })} ` })} ` })} ` })}`;
-}, "C:/laragon/www/wajiknime-main/src/pages/disclaimers/index.astro", void 0);
+}, "C:/laragon/www/Splashanime-id/src/pages/disclaimers/index.astro", void 0);
 
-const $$file = "C:/laragon/www/wajiknime-main/src/pages/disclaimers/index.astro";
+const $$file = "C:/laragon/www/Splashanime-id/src/pages/disclaimers/index.astro";
 const $$url = "/disclaimers";
 
 const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({

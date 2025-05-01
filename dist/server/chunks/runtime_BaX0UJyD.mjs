@@ -1,5 +1,5 @@
-function setGetEnv(fn, reset = false) {
-  _onSetGetEnv(reset);
+function setGetEnv(fn) {
+  _onSetGetEnv();
 }
 let _onSetGetEnv = () => {
 };

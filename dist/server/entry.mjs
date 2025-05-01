@@ -1,9 +1,8 @@
-import { renderers } from './renderers.mjs';
-import { c as createExports, s as serverEntrypointModule } from './chunks/_@astrojs-ssr-adapter_D6dkrC36.mjs';
-import { manifest } from './manifest_BECTb5Cm.mjs';
+import { r as renderers } from './chunks/internal_BsTt5pTQ.mjs';
+import { c as createExports, s as serverEntrypointModule } from './chunks/_@astrojs-ssr-adapter_CM6xqlwK.mjs';
+import { manifest } from './manifest_CMea297b.mjs';
 
-const serverIslandMap = new Map([
-]);;
+const serverIslandMap = new Map();;
 
 const _page0 = () => import('./pages/_image.astro.mjs');
 const _page1 = () => import('./pages/404.astro.mjs');
@@ -52,12 +51,13 @@ const _manifest = Object.assign(manifest, {
     pageMap,
     serverIslandMap,
     renderers,
+    actions: () => import('./_noop-actions.mjs'),
     middleware: () => import('./_noop-middleware.mjs')
 });
 const _args = {
     "mode": "standalone",
-    "client": "file:///C:/laragon/www/wajiknime-main/dist/client/",
-    "server": "file:///C:/laragon/www/wajiknime-main/dist/server/",
+    "client": "file:///C:/laragon/www/Splashanime-id/dist/client/",
+    "server": "file:///C:/laragon/www/Splashanime-id/dist/server/",
     "host": "0.0.0.0",
     "port": 4321,
     "assets": "_astro"

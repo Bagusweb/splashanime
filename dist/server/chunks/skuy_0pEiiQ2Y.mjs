@@ -1,4 +1,4 @@
-import { a as animeConfig } from './animeConfig_Do2EemRP.mjs';
+import { a as animeConfig } from './animeConfig_DiI4YoYj.mjs';
 import { g as generateUrlPath } from './generateUrlPath_Bu-CsIBe.mjs';
 
 const {
