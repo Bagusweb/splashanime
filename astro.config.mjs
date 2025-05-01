@@ -1,7 +1,7 @@
 // @ts-check
 import { defineConfig, envField } from "astro/config";
 import tailwind from "@astrojs/tailwind";
-import node from "@astrojs/node";
+import vercel from "@astrojs/vercel"; // ✅ gunakan adapter vercel yang benar
 
 // https://astro.build/config
 export default defineConfig({
@@ -14,11 +14,9 @@ export default defineConfig({
     },
   },
 
-  output: "server",
+  output: "server", // ✅ tetap server karena vercel/serverless mendukungnya
 
-  adapter: node({
-    mode: "standalone",
-  }),
+  adapter: vercel(), // ✅ ini menggantikan `node()`
 
   integrations: [tailwind()],
 
